@@ -1,7 +1,7 @@
 const scope=new URL(self.registration.scope);
 const prefix="structlab-mobile-"+scope.pathname+"-";
-const cacheName=prefix+"4c002647d7e45156";
-const shell=new URL("./",scope).href, course=new URL("./lesson-4c002647d7e45156.bin",scope).href;
+const cacheName=prefix+"6b65dbcece579a73";
+const shell=new URL("./",scope).href, course=new URL("./lesson-6b65dbcece579a73.bin",scope).href;
 self.addEventListener("install",e=>e.waitUntil((async()=>{
   const cache=await caches.open(cacheName);
   await cache.addAll([new Request(shell,{cache:"reload"}),new Request(course)]);
