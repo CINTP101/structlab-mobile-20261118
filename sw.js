@@ -1,6 +1,6 @@
 const scope=new URL(self.registration.scope);
 const prefix="structlab-mobile-"+scope.pathname+"-";
-const cacheName=prefix+"2d8ca63b00edf951";
+const cacheName=prefix+"2d8ca63b00edf951-reader2";
 const shell=new URL("./",scope).href, course=new URL("./lesson-2d8ca63b00edf951.bin",scope).href;
 self.addEventListener("install",e=>e.waitUntil((async()=>{
   const cache=await caches.open(cacheName);
@@ -11,6 +11,9 @@ self.addEventListener("activate",e=>e.waitUntil((async()=>{
   for(const name of await caches.keys())if(name.startsWith(prefix)&&name!==cacheName)await caches.delete(name);
   await self.clients.claim();
 })()));
+self.addEventListener("message",e=>{
+  if(e.data==="control-open-reader")e.waitUntil(self.clients.claim());
+});
 self.addEventListener("fetch",e=>{
   if(e.request.method!=="GET")return;
   const u=new URL(e.request.url);
